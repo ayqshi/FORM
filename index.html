@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>FORM</title>
+    <link rel="manifest" id="manifest">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='black'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='6'/></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.4/dist/dexie.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <script
+        type="module"> import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3"; window.FaceLandmarker = FaceLandmarker; window.FilesetResolver = FilesetResolver; </script>
+</head>
+
+<body class="on-home" data-theme="dark">
+    <div id="init-screen">
+        <div class="loader-ring mb-8"></div>
+        <p class="font-mono text-xs tracking-widest uppercase text-white/50">FORM</p>
+    </div>
+    <main id="view-home" class="view active">
+        <div class="camera-container" id="camera-container"><video id="camera-feed" autoplay playsinline muted></video>
+            <div id="screen-flash"></div><canvas id="frozen-canvas" class="hidden-forced"></canvas>
+            <div class="scan-laser" id="scan-laser"></div>
+            <div class="absolute top-0 w-full px-6 header-pt flex justify-between items-start z-20"><button
+                    id="btn-light"
+                    class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                        data-lucide="flashlight" class="w-5 h-5"></i></button><button id="btn-flip"
+                    class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                        data-lucide="switch-camera" class="w-5 h-5"></i></button></div>
+            <div id="analysis-loader"
+                class="absolute inset-0 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center hidden-forced z-30">
+                <div class="loader-ring mb-6"></div>
+                <p class="font-mono text-xs text-white tracking-widest uppercase opacity-70" id="analysis-log">Mapping
+                    Topology...</p>
+            </div>
+            <div class="camera-controls"><button class="shutter-btn" id="btn-capture" disabled>
+                    <div class="shutter-btn-inner"></div>
+                </button></div>
+        </div>
+    </main>
+    <main id="view-history" class="view">
+        <div class="px-6 header-pt">
+            <h1 class="text-3xl font-bold tracking-tight mb-8">Database</h1>
+            <div class="ios-card border-none bg-transparent" id="history-container">
+                <div class="p-10 text-center bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)]"
+                    id="history-empty"><i data-lucide="scan-line"
+                        class="w-10 h-10 mx-auto text-[var(--border-color)] mb-4"></i>
+                    <p class="text-sm font-medium var(--text-muted)">No topological data stored.</p>
+                </div>
+                <div id="history-list" class="flex flex-col gap-4"></div>
+            </div>
+        </div>
+    </main>
+    <main id="view-habits" class="view">
+        <div class="px-6 header-pt">
+            <h1 class="text-3xl font-bold tracking-tight mb-2">Protocols</h1>
+            <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">System generated routines</p>
+            <form id="add-habit-form" class="mb-6 flex gap-3"><input type="text" id="habit-input"
+                    placeholder="Add custom protocol..."
+                    class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-[var(--text-muted)] transition"
+                    required><button type="submit"
+                    class="bg-[var(--accent)] text-[var(--accent-invert)] px-6 rounded-2xl active:scale-95 transition"><i
+                        data-lucide="plus" class="w-5 h-5"></i></button></form>
+            <div class="ios-card" id="habit-list"></div>
+            <div class="mt-6 text-center"><button onclick="App.resetHabits()"
+                    class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] p-3 active:opacity-50">Reset
+                    Daily Status</button></div>
+        </div>
+    </main>
+    <main id="view-progress" class="view">
+        <div class="px-6 header-pt">
+            <h1 class="text-3xl font-bold tracking-tight mb-8">Analytics</h1>
+            <div class="ios-card p-6 mb-8">
+                <h3 class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-6">Structural Harmony
+                    Trend</h3>
+                <div class="w-full h-56"><canvas id="progressChart"></canvas></div>
+            </div>
+            <h2 class="text-xs font-bold uppercase tracking-widest var(--text-muted) mb-4 mt-8 ml-2">Milestones</h2>
+            <div class="ios-card p-5">
+                <div id="milestones-list" class="space-y-6"></div>
+            </div>
+        </div>
+    </main>
+    <main id="view-settings" class="view">
+        <div class="px-6 header-pt">
+            <h1 class="text-3xl font-bold tracking-tight mb-8">System</h1>
+            <div class="mb-8">
+                <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">
+                    Preferences</h2>
+                <div class="ios-card">
+                    <div class="ios-list-item"><span class="font-medium text-sm">Light Mode</span>
+                        <div class="relative inline-block w-12 h-6 rounded-full bg-[var(--border-color)] transition-colors cursor-pointer"
+                            id="theme-toggle" onclick="App.toggleTheme()">
+                            <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200"
+                                id="theme-knob"></div>
+                        </div>
+                    </div>
+                    <div class="ios-list-item"><span class="font-medium text-sm">Strict Scoring Algorithm</span>
+                        <div class="relative inline-block w-12 h-6 rounded-full transition-colors cursor-pointer"
+                            id="strict-toggle" onclick="App.toggleStrict()">
+                            <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200"
+                                id="strict-knob"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-[10px] text-[var(--text-muted)] ml-4 mt-3 leading-relaxed">Strict mode applies maximum
+                    penalization for asymmetrical variants and non-optimal dimorphic traits. Designed for extreme
+                    accuracy.</p>
+            </div>
+            <div class="mb-8">
+                <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">Data
+                    Management</h2>
+                <div class="ios-card">
+                    <div class="ios-list-item cursor-pointer active:bg-[var(--border-color)] transition"
+                        onclick="App.exportData()"><span class="font-medium text-sm">Export Encrypted Data</span><i
+                            data-lucide="download" class="w-4 h-4 text-[var(--text-muted)]"></i></div>
+                    <div class="ios-list-item cursor-pointer active:bg-[#2a0d0d] transition"
+                        onclick="App.clearHistory()"><span class="text-red-500 font-medium text-sm">Purge Neural
+                            Database</span><i data-lucide="trash-2" class="w-4 h-4 text-red-500"></i></div>
+                </div>
+            </div>
+            <div class="text-center pb-8 opacity-40 mt-12">
+                <p class="font-mono text-[9px] uppercase tracking-widest">FORM Core Engine v5.0.1</p>
+                <p class="font-mono text-[9px] uppercase tracking-widest mt-1">Zero Backend • Local Topology</p>
+            </div>
+        </div>
+    </main>
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-tab="home" onclick="App.switchTab('home')"><i data-lucide="scan-line"
+                class="w-6 h-6"></i><span>SCAN</span></div>
+        <div class="nav-item" data-tab="history" onclick="App.switchTab('history')"><i data-lucide="database"
+                class="w-6 h-6"></i><span>DATA</span></div>
+        <div class="nav-item" data-tab="habits" onclick="App.switchTab('habits')"><i data-lucide="crosshair"
+                class="w-6 h-6"></i><span>ROUTINE</span></div>
+        <div class="nav-item" data-tab="progress" onclick="App.switchTab('progress')"><i data-lucide="activity"
+                class="w-6 h-6"></i><span>TRENDS</span></div>
+        <div class="nav-item" data-tab="settings" onclick="App.switchTab('settings')"><i data-lucide="settings-2"
+                class="w-6 h-6"></i><span>SYS</span></div>
+    </nav>
+    <div id="results-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight">Analysis Report</h2>
+                    <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mt-1">Geometric
+                        Evaluation</p>
+                </div><button onclick="App.closeModal()"
+                    class="p-3 bg-[var(--bg-main)] rounded-full active:scale-90 transition border border-[var(--border-color)]"><i
+                        data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div
+                class="flex items-center gap-6 mb-8 bg-[var(--bg-main)] p-6 rounded-3xl border border-[var(--border-color)]">
+                <div class="font-mono text-6xl font-bold tracking-tighter" id="res-sym">--</div>
+                <div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-1">Structural Harmony</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">Overall rating based on facial symmetry,
+                        proportional ratios, and dimorphic indicators.</p>
+                </div>
+            </div>
+            <div class="data-grid">
+                <div class="data-badge">
+                    <p class="title">FWHR Ratio</p>
+                    <p class="val" id="res-fwhr">--</p>
+                    <p class="desc">Facial Width-to-Height. ~1.8-1.9 is structurally robust. Relates to dimorphism.</p>
+                </div>
+                <div class="data-badge">
+                    <p class="title">Canthal Tilt</p>
+                    <p class="val" id="res-canthal">--°</p>
+                    <p class="desc">Eye axis angle. Positive (+) is "hunter" alert. Negative (-) indicates fatigue/lack
+                        of under-eye support.</p>
+                </div>
+                <div class="data-badge">
+                    <p class="title">Gonial Angle</p>
+                    <p class="val" id="res-jaw">--°</p>
+                    <p class="desc">Jaw steepness. 115°-130° is ideal. Higher angles lack definition, lower looks
+                        excessively square.</p>
+                </div>
+                <div class="data-badge">
+                    <p class="title">Midface Compactness</p>
+                    <p class="val" id="res-mid">--</p>
+                    <p class="desc">Eye to mouth distance relative to face. Lower ratios indicate a more compact,
+                        youthful structure.</p>
+                </div>
+            </div>
+            <div class="ios-card p-5 mb-6 bg-[var(--bg-main)]">
+                <h3 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Facial Thirds
+                    (U:M:L)</h3>
+                <div class="flex h-5 rounded-full overflow-hidden font-mono text-[9px] text-white text-center leading-5 font-bold"
+                    id="thirds-bar">
+                    <div style="width:33%; background:#222" id="t-upper">33%</div>
+                    <div style="width:33%; background:#444" id="t-mid">33%</div>
+                    <div style="width:34%; background:#111" id="t-lower">34%</div>
+                </div>
+                <p class="text-[10px] text-[var(--text-muted)] mt-3 text-center">Ideally balanced at roughly 33% each.
+                </p>
+            </div>
+            <div class="space-y-6 mb-8 px-2">
+                <div>
+                    <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3">
+                        <span>Leanness / Retention</span><span id="res-bloat-val" class="font-mono">--/100</span></div>
+                    <div class="progress-track">
+                        <div id="res-bloat-bar" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3"><span>Skin
+                            Texture Clarity</span><span id="res-skin-val" class="font-mono">--/100</span></div>
+                    <div class="progress-track">
+                        <div id="res-skin-bar" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-[var(--accent)] text-[var(--accent-invert)] rounded-2xl p-6 mb-8 mt-4">
+                <h3 class="text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-2 opacity-80"><i
+                        data-lucide="cpu" class="w-4 h-4"></i> System Directives Generated</h3>
+                <div class="text-sm font-medium space-y-2 leading-relaxed" id="res-actions">Analyzing geometry...</div>
+            </div><button onclick="App.closeModal()"
+                class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] font-bold py-5 rounded-2xl active:scale-95 transition tracking-wide text-sm">Close
+                Report</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
