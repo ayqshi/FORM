@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>FORM</title>
@@ -30,10 +31,10 @@
                 <rect width='100' height='100' fill='black' rx='20' />
                 <circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='6' />
             </svg>
-            <h1 class="text-5xl font-bold tracking-tight mb-6">FORM.</h1>
-            <p class="text-lg text-[var(--text-muted)] mb-10 leading-relaxed">Advanced geometric facial topology
-                scanning. FORM evaluates structural harmony, symmetry, and proportions using local on-device processing.
-                No data leaves your hardware.</p>
+            <h1 class="text-5xl font-bold tracking-tight mb-6">FORM</h1>
+            <p class="text-lg text-[var(--text-muted)] mb-10 leading-relaxed">Advanced geometric facial analysis. FORM
+                evaluates facial harmony, symmetry, and proportions using private, on-device processing. No data leaves
+                your device.</p>
             <div class="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-3xl inline-block text-left">
                 <h3 class="font-bold text-xl mb-4">Installation Guide</h3>
                 <ol class="list-decimal pl-5 space-y-3 text-[var(--text-muted)]">
@@ -43,8 +44,8 @@
                     <li>Launch the FORM app directly from your home screen.</li>
                 </ol>
             </div>
-            <p class="mt-12 text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">Local Topology • Zero
-                Backend</p>
+            <p class="mt-12 text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">Privacy First •
+                Processed Locally</p>
         </div>
     </div>
     <div id="app-container">
@@ -54,60 +55,62 @@
         </div>
         <div id="survey-modal"
             class="absolute inset-0 bg-[var(--bg-main)] z-[100] hidden flex flex-col justify-center px-8">
-            <h2 class="text-3xl font-bold tracking-tight mb-2">Personal Survey</h2>
-            <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">Allow form. to give you
-                personalized results</p>
+            <h2 class="text-3xl font-bold tracking-tight mb-2">Profile Setup</h2>
+            <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">Help us personalize your
+                experience</p>
             <form id="profile-form" class="space-y-5">
                 <div class="grid grid-cols-2 gap-4">
                     <div><label
                             class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Age</label><input
-                            type="number" id="prof-age" style="color: black;" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-white rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-white transition">
+                            type="number" id="prof-age" required
+                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
                     </div>
                     <div><label
                             class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Gender</label><select
-                            id="prof-gender" style="color: black;" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-white rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-white transition appearance-none">
-                            <option style="color: black;" value="male">Male</option>
-                            <option style="color: black;" value="female">Female</option>
+                            id="prof-gender" required
+                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition appearance-none">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
                         </select></div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div><label
                             class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Height
-                            (cm)</label><input type="number" id="prof-height" style="color: black;" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-white rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-white transition">
+                            (cm)</label><input type="number" id="prof-height" required
+                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
                     </div>
                     <div><label
                             class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Weight
-                            (kg)</label><input type="number" id="prof-weight" style="color: black;" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-white rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-white transition">
+                            (kg)</label><input type="number" id="prof-weight" required
+                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
                     </div>
                 </div><button type="submit"
-                    class="w-full bg-white text-black font-bold py-5 rounded-2xl mt-8 active:scale-95 transition tracking-wide text-sm">Continue</button>
+                    class="w-full bg-[var(--text-main)] text-[var(--bg-main)] font-bold py-5 rounded-2xl mt-8 active:scale-95 transition tracking-wide text-sm">Get
+                    Started</button>
             </form>
         </div>
         <main id="view-home" class="view active">
             <div class="camera-container" id="camera-container"><video id="camera-feed" autoplay playsinline
                     muted></video>
-                <div id="screen-flash"></div><canvas id="frozen-canvas"></canvas>
-                <div class="scan-laser" id="scan-laser"></div>
-                <div class="absolute top-0 w-full px-6 header-pt flex justify-between items-start z-20"><button
-                        id="btn-light"
-                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                <div id="screen-flash"></div>
+                <div id="analysis-loader"
+                    class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center hidden-forced">
+                    <div class="loader-ring mb-6"></div>
+                    <p class="font-mono text-xs text-white tracking-widest uppercase opacity-70 drop-shadow-md"
+                        id="analysis-log">Analyzing...</p>
+                </div><canvas id="frozen-canvas" class="hidden-forced"></canvas>
+                <div class="scan-laser hidden-forced" id="scan-laser"></div>
+                <div
+                    class="absolute top-0 w-full px-6 header-pt flex justify-between items-start z-20 pointer-events-none">
+                    <button id="btn-light"
+                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
                             data-lucide="flashlight" class="w-5 h-5"></i></button>
                     <div
                         class="bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2">
                         <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i><span id="streak-counter"
                             class="font-mono text-xs font-bold text-white">0</span></div><button id="btn-flip"
-                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
                             data-lucide="switch-camera" class="w-5 h-5"></i></button>
-                </div>
-                <div id="analysis-loader"
-                    class="absolute inset-0 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center hidden-forced z-30">
-                    <div class="loader-ring mb-6"></div>
-                    <p class="font-mono text-xs text-white tracking-widest uppercase opacity-70" id="analysis-log">
-                        Mapping Topology...</p>
                 </div>
                 <div class="camera-controls"><button class="shutter-btn" id="btn-capture" disabled>
                         <div class="shutter-btn-inner"></div>
@@ -116,12 +119,12 @@
         </main>
         <main id="view-history" class="view">
             <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-8">SNAPSHOTS</h1>
+                <h1 class="text-3xl font-bold tracking-tight mb-8">History</h1>
                 <div class="ios-card border-none bg-transparent" id="history-container">
                     <div class="p-10 text-center bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)]"
-                        id="history-empty"><i data-lucide="scan-line"
+                        id="history-empty"><i data-lucide="scan-face"
                             class="w-10 h-10 mx-auto text-[var(--border-color)] mb-4"></i>
-                        <p class="text-sm font-medium var(--text-muted)">No topological data stored.</p>
+                        <p class="text-sm font-medium var(--text-muted)">No past scans found.</p>
                     </div>
                     <div id="history-list" class="flex flex-col gap-4"></div>
                 </div>
@@ -129,12 +132,11 @@
         </main>
         <main id="view-habits" class="view">
             <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-2">TODO</h1>
-                <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">System generated routines
-                </p>
+                <h1 class="text-3xl font-bold tracking-tight mb-2">Routines</h1>
+                <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">Daily recommendations</p>
                 <form id="add-habit-form" class="mb-6 flex gap-3"><input type="text" id="habit-input"
-                        placeholder="Add custom protocol..."
-                        class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-[var(--text-muted)] transition"
+                        placeholder="Add custom habit..."
+                        class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition"
                         required><button type="submit"
                         class="bg-[var(--accent)] text-[var(--accent-invert)] px-6 rounded-2xl active:scale-95 transition"><i
                             data-lucide="plus" class="w-5 h-5"></i></button></form>
@@ -163,8 +165,8 @@
                     </div>
                 </div>
                 <div class="ios-card p-6 mb-8">
-                    <h3 class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-6">Structural
-                        Harmony Trend</h3>
+                    <h3 class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-6">Harmony Trend
+                    </h3>
                     <div class="w-full h-56"><canvas id="progressChart"></canvas></div>
                 </div>
                 <h2
@@ -179,7 +181,7 @@
         </main>
         <main id="view-settings" class="view">
             <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-8">System</h1>
+                <h1 class="text-3xl font-bold tracking-tight mb-8">Settings</h1>
                 <div class="mb-8">
                     <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">
                         Preferences</h2>
@@ -199,47 +201,44 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-[10px] text-[var(--text-muted)] ml-4 mt-3 leading-relaxed">Strict mode applies
-                        maximum penalization for asymmetrical variants. Turn off for a more lenient baseline.</p>
                 </div>
                 <div class="mb-8">
                     <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">Data
                         Management</h2>
                     <div class="ios-card">
                         <div class="ios-list-item cursor-pointer active:bg-[var(--border-color)] transition"
-                            onclick="App.exportData()"><span class="font-medium text-sm">Export Encrypted Data</span><i
+                            onclick="App.exportData()"><span class="font-medium text-sm">Export Data</span><i
                                 data-lucide="download" class="w-4 h-4 text-[var(--text-muted)]"></i></div>
                         <div class="ios-list-item cursor-pointer active:bg-[#2a0d0d] transition"
-                            onclick="App.clearHistory()"><span class="text-red-500 font-medium text-sm">WIPE ALL
-                                DATA</span><i data-lucide="trash-2" class="w-4 h-4 text-red-500"></i></div>
+                            onclick="App.clearHistory()"><span class="text-red-500 font-medium text-sm">Delete All
+                                Data</span><i data-lucide="trash-2" class="w-4 h-4 text-red-500"></i></div>
                     </div>
                 </div>
                 <div class="text-center pb-8 opacity-40 mt-12">
-                    <p class="font-mono text-[9px] uppercase tracking-widest">form. v0.1.0</p>
-                    <p class="font-mono text-[9px] uppercase tracking-widest mt-1">Zero Backend, completely private and
-                        anonymous.</p>
+                    <p class="font-mono text-[9px] uppercase tracking-widest">FORM v6.2.0</p>
+                    <p class="font-mono text-[9px] uppercase tracking-widest mt-1">Privacy First • Processed Locally</p>
                 </div>
             </div>
         </main>
         <nav class="bottom-nav">
-            <div class="nav-item active" data-tab="home" onclick="App.switchTab('home')"><i data-lucide="scan-line"
+            <div class="nav-item active" data-tab="home" onclick="App.switchTab('home')"><i data-lucide="camera"
                     class="w-6 h-6"></i><span>SCAN</span></div>
-            <div class="nav-item" data-tab="history" onclick="App.switchTab('history')"><i data-lucide="image"
-                    class="w-6 h-6"></i><span>SNAPS</span></div>
-            <div class="nav-item" data-tab="habits" onclick="App.switchTab('habits')"><i data-lucide="crosshair"
-                    class="w-6 h-6"></i><span>ROUTINE</span></div>
-            <div class="nav-item" data-tab="progress" onclick="App.switchTab('progress')"><i data-lucide="activity"
+            <div class="nav-item" data-tab="history" onclick="App.switchTab('history')"><i data-lucide="history"
+                    class="w-6 h-6"></i><span>HISTORY</span></div>
+            <div class="nav-item" data-tab="habits" onclick="App.switchTab('habits')"><i data-lucide="list-todo"
+                    class="w-6 h-6"></i><span>HABITS</span></div>
+            <div class="nav-item" data-tab="progress" onclick="App.switchTab('progress')"><i data-lucide="trending-up"
                     class="w-6 h-6"></i><span>TRENDS</span></div>
-            <div class="nav-item" data-tab="settings" onclick="App.switchTab('settings')"><i data-lucide="settings-2"
+            <div class="nav-item" data-tab="settings" onclick="App.switchTab('settings')"><i data-lucide="settings"
                     class="w-6 h-6"></i><span>SETTINGS</span></div>
         </nav>
         <div id="results-modal" class="modal-overlay">
             <div class="modal-content" id="report-content">
                 <div class="flex justify-between items-center mb-8">
                     <div>
-                        <h2 class="text-3xl font-bold tracking-tight">Analysis Report</h2>
+                        <h2 class="text-3xl font-bold tracking-tight">Scan Results</h2>
                         <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mt-1">
-                            Geometric Evaluation</p>
+                            Detailed Breakdown</p>
                     </div><button onclick="App.closeModal()"
                         class="p-3 bg-[var(--bg-main)] rounded-full active:scale-90 transition border border-[var(--border-color)]"><i
                             data-lucide="x" class="w-5 h-5"></i></button>
@@ -311,9 +310,9 @@
                 </div>
                 <div class="bg-[var(--accent)] text-[var(--accent-invert)] rounded-2xl p-6 mb-8 mt-4">
                     <h3 class="text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-2 opacity-80">
-                        <i data-lucide="cpu" class="w-4 h-4"></i> System Directives Generated</h3>
-                    <div class="text-sm font-medium space-y-2 leading-relaxed" id="res-actions">Analyzing geometry...
-                    </div>
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Recommended Actions</h3>
+                    <div class="text-sm font-medium space-y-2 leading-relaxed" id="res-actions">Loading
+                        recommendations...</div>
                 </div>
                 <div class="flex gap-4"><button onclick="App.shareResults()"
                         class="flex-1 bg-[var(--accent)] text-[var(--accent-invert)] border border-[var(--border-color)] font-bold py-5 rounded-2xl active:scale-95 transition tracking-wide text-sm flex justify-center items-center gap-2"><i
