@@ -249,32 +249,36 @@
         </div>
         <main id="view-home" class="view active">
             <div class="camera-container" id="camera-container"><video id="camera-feed" autoplay playsinline
-                    muted></video>
-                <div id="screen-flash"></div>
-                <div id="analysis-loader"
-                    class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center hidden-forced"
-                    style="z-index:35;">
-                    <div class="loader-ring mb-6"></div>
-                    <p class="font-mono text-xs text-white tracking-widest uppercase opacity-70 drop-shadow-md"
-                        id="analysis-log">Analyzing...</p>
-                </div><canvas id="frozen-canvas" class="hidden-forced"></canvas>
-                <div class="scan-laser hidden-forced" id="scan-laser"></div>
-                <div id="blur-indicator">⚠ FOCUS</div>
+                    muted></video><canvas id="live-mesh-canvas"
+                    class="absolute inset-0 w-full h-full z-10 pointer-events-none"></canvas>
+                <div id="focus-guide"
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-white/40 rounded-3xl z-20 transition-all duration-300 pointer-events-none">
+                </div>
+                <div id="hair-warning"
+                    class="absolute top-24 w-full text-center text-[10px] font-mono tracking-widest text-white opacity-0 transition-opacity z-20 drop-shadow-md">
+                    HAIR OBSTRUCTING FACE</div>
+                <div id="live-score-display"
+                    class="absolute bottom-32 w-full text-center font-mono text-5xl font-bold text-white z-20 drop-shadow-lg opacity-0 transition-opacity">
+                    --</div>
                 <div
                     class="absolute top-0 w-full px-5 header-pt flex justify-between items-start z-20 pointer-events-none">
-                    <button id="btn-light"
-                        class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
-                            data-lucide="flashlight" class="w-5 h-5"></i></button>
+                    <div class="relative pointer-events-auto"><button id="btn-light"
+                            class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                                data-lucide="flashlight" class="w-5 h-5"></i></button>
+                        <div id="flash-slider-menu"
+                            class="absolute top-full mt-2 bg-black/80 p-3 rounded-xl hidden-forced border border-white/10">
+                            <input type="range" id="flash-intensity" min="1" max="100" value="50" class="w-24"></div>
+                    </div>
                     <div
-                        class="bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2">
+                        class="bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 pointer-events-auto">
                         <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i><span id="streak-counter"
-                            class="font-mono text-xs font-bold text-white">0</span></div><button id="btn-flip"
-                        class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
-                            data-lucide="switch-camera" class="w-5 h-5"></i></button>
+                            class="font-mono text-xs font-bold text-white">0</span></div>
+                    <div class="flex flex-col gap-3 pointer-events-auto"><button id="btn-flip"
+                            class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10"><i
+                                data-lucide="switch-camera" class="w-5 h-5"></i></button><button id="btn-ghost"
+                            class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white/50 active:scale-90 transition border border-white/10"
+                            title="Ghost Mode (Don't Save)"><i data-lucide="ghost" class="w-5 h-5"></i></button></div>
                 </div>
-                <div class="camera-controls"><button class="shutter-btn" id="btn-capture" disabled>
-                        <div class="shutter-btn-inner"></div>
-                    </button></div>
             </div>
         </main>
         <main id="view-history" class="view">
