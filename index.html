@@ -8,10 +8,43 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FORM</title>
-    <link rel="manifest" id="manifest">
-    <link rel="apple-touch-icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='black'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='6'/></svg>">
+    <meta name="apple-mobile-web-app-title" content="form.">
+    <meta name="application-name" content="form.">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="format-detection" content="telephone=no">
+    <title>form. — Facial Harmony Analysis</title>
+    <meta name="description"
+        content="form. uses on-device neural networks to analyze facial geometry, symmetry, and harmony. Privacy-first — your data never leaves your device.">
+    <meta name="keywords"
+        content="facial analysis, facial harmony, symmetry score, facial symmetry, golden ratio face, facial geometry, wellness app, face score, canthal tilt, facial structure, face rating, jawline, bone structure">
+    <meta name="author" content="ayqshi">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="English">
+    <meta name="rating" content="general">
+    <link rel="canonical" href="https://ayqshi.github.io/form./">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ayqshi.github.io/form./">
+    <meta property="og:title" content="form. — What's your score?">
+    <meta property="og:description"
+        content="Advanced on-device facial analysis. Symmetry, harmony, golden ratio, posture — all processed privately. Never uploaded to a server.">
+    <meta property="og:image" content="https://ayqshi.github.io/form./og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="form.">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ayqshi">
+    <meta name="twitter:title" content="form. — What's your score?">
+    <meta name="twitter:description"
+        content="Discover your facial harmony score using advanced on-device AI. Privacy-first. No uploads.">
+    <meta name="twitter:image" content="https://ayqshi.github.io/form./og-image.jpg">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%23000'/><circle cx='256' cy='220' r='110' fill='none' stroke='%23fff' stroke-width='22'/><ellipse cx='256' cy='370' rx='160' ry='60' fill='none' stroke='%23fff' stroke-width='18' stroke-dasharray='12 8'/><circle cx='256' cy='220' r='8' fill='%23fff'/></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%23000'/><circle cx='256' cy='220' r='110' fill='none' stroke='%23fff' stroke-width='22'/><ellipse cx='256' cy='370' rx='160' ry='60' fill='none' stroke='%23fff' stroke-width='18' stroke-dasharray='12 8'/><circle cx='256' cy='220' r='8' fill='%23fff'/></svg>">
+    <link rel="manifest" href="manifest.json">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -19,97 +52,226 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.4/dist/dexie.min.js"></script>
-    <link href="style.css" rel="stylesheet">
     <script
-        type="module"> import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3"; window.FaceLandmarker = FaceLandmarker; window.FilesetResolver = FilesetResolver; </script>
+        type="module"> import { FaceLandmarker, PoseLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3"; window.FaceLandmarker = FaceLandmarker; window.PoseLandmarker = PoseLandmarker; window.FilesetResolver = FilesetResolver; </script>
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="on-home" data-theme="dark">
-    <div id="desktop-landing">
-        <div class="max-w-2xl mx-auto"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'
-                class="w-24 h-24 mx-auto mb-8">
-                <rect width='100' height='100' fill='black' rx='20' />
-                <circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='6' />
-            </svg>
-            <h1 class="text-5xl font-bold tracking-tight mb-6">FORM</h1>
-            <p class="text-lg text-[var(--text-muted)] mb-10 leading-relaxed">Advanced geometric facial analysis. FORM
-                evaluates facial harmony, symmetry, and proportions using private, on-device processing. No data leaves
-                your device.</p>
-            <div class="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-3xl inline-block text-left">
-                <h3 class="font-bold text-xl mb-4">Installation Guide</h3>
-                <ol class="list-decimal pl-5 space-y-3 text-[var(--text-muted)]">
-                    <li>Open this website on your mobile device (iOS Safari or Android Chrome).</li>
-                    <li>Tap the <strong>Share</strong> icon (iOS) or Menu (Android).</li>
-                    <li>Select <strong>"Add to Home Screen"</strong>.</li>
-                    <li>Launch the FORM app directly from your home screen.</li>
+    <div id="desktop-landing"
+        style="background:#000; color:#fff; min-height:100dvh; align-items:center; justify-content:center; gap:80px; padding:60px;">
+        <div style="max-width:400px;">
+            <div style="display:flex; align-items:baseline; gap:4px; margin-bottom:32px;"><span
+                    style="font-family:'JetBrains Mono',monospace; font-size:52px; font-weight:700; letter-spacing:-0.03em;">form.</span>
+            </div>
+            <p style="font-size:17px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:40px;">Advanced
+                geometric facial analysis using on-device neural networks. Symmetry, harmony, posture, and wellness —
+                completely private.</p>
+            <div style="background:#111; border:1px solid #222; border-radius:24px; padding:28px; margin-bottom:24px;">
+                <p
+                    style="font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.3); margin-bottom:16px;">
+                    Add to iPhone</p>
+                <ol style="font-size:14px; color:rgba(255,255,255,0.6); line-height:2; padding-left:20px;">
+                    <li>Open in <strong style="color:#fff;">Safari</strong> on your iPhone</li>
+                    <li>Tap the <strong style="color:#fff;">Share</strong> button (↑)</li>
+                    <li>Select <strong style="color:#fff;">Add to Home Screen</strong></li>
+                    <li>Launch form. like a native app</li>
                 </ol>
             </div>
-            <p class="mt-12 text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">Privacy First •
-                Processed Locally</p>
+            <p
+                style="font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.2);">
+                Privacy First · Processed Locally · No Uploads</p>
+            <p style="font-size:10px; margin-top:8px; color:rgba(255,255,255,0.15);">by <a
+                    href="https://github.com/ayqshi" style="color:rgba(255,255,255,0.3);">ayqshi</a></p>
+        </div>
+        <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><svg width="80" height="80" viewBox="0 0 512 512" style="margin-bottom:24px;">
+                    <rect width="512" height="512" rx="112" fill="#111" />
+                    <circle cx="256" cy="220" r="110" fill="none" stroke="#fff" stroke-width="22" />
+                    <ellipse cx="256" cy="370" rx="160" ry="60" fill="none" stroke="#fff" stroke-width="18"
+                        stroke-dasharray="12 8" />
+                    <circle cx="256" cy="220" r="8" fill="#fff" />
+                </svg>
+                <p
+                    style="font-family:'JetBrains Mono',monospace; font-size:28px; font-weight:700; color:#fff; margin-bottom:8px;">
+                    form.</p>
+                <p
+                    style="font-size:12px; color:rgba(255,255,255,0.3); text-align:center; line-height:1.6; margin-bottom:32px;">
+                    Facial harmony analysis.<br>Processed on-device.</p>
+                <div
+                    style="width:100%; background:#111; border:1px solid #222; border-radius:16px; padding:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:12px; color:rgba(255,255,255,0.5);">Last score</span><span
+                        style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#fff;">—/10</span>
+                </div>
+                <div style="display:flex; gap:8px; width:100%;">
+                    <div style="flex:1; background:#fff; border-radius:14px; padding:14px; text-align:center;"><span
+                            style="font-size:11px; font-weight:700; color:#000;">SCAN</span></div>
+                    <div
+                        style="flex:1; background:#111; border:1px solid #222; border-radius:14px; padding:14px; text-align:center;">
+                        <span style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.5);">HABITS</span></div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="app-container">
         <div id="init-screen">
-            <div class="loader-ring mb-8"></div>
-            <p class="font-mono text-xs tracking-widest uppercase text-white/50">FORM</p>
+            <div class="init-ring" style="margin-bottom:48px;"></div>
+            <div class="init-logo">form.</div>
+            <div class="init-sub">Initializing Neural Core</div>
+            <div class="init-status" id="init-status-text">Loading vision models...</div>
         </div>
-        <div id="survey-modal"
-            class="absolute inset-0 bg-[var(--bg-main)] z-[100] hidden flex flex-col justify-center px-8">
-            <h2 class="text-3xl font-bold tracking-tight mb-2">Profile Setup</h2>
-            <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">Help us personalize your
-                experience</p>
-            <form id="profile-form" class="space-y-5">
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label
-                            class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Age</label><input
-                            type="number" id="prof-age" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
-                    </div>
-                    <div><label
-                            class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Gender</label><select
-                            id="prof-gender" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition appearance-none">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select></div>
+        <div id="survey-modal" class="absolute inset-0 bg-black z-[200] flex flex-col" style="padding: 0;">
+            <div
+                style="padding: calc(env(safe-area-inset-top) + 24px) 28px 0; display:flex; justify-content:space-between; align-items:center;">
+                <button onclick="Survey.back()" id="survey-back-btn"
+                    style="background:none; border:none; color:rgba(255,255,255,0.4); font-size:14px; padding:0; display:none; cursor:pointer;">←
+                    Back</button>
+                <div style="flex:1;"></div>
+                <div class="dot-indicator" id="survey-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label
-                            class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Height
-                            (cm)</label><input type="number" id="prof-height" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
+            </div>
+            <div class="slide active" id="slide-1" style="padding: 0 28px;">
+                <div style="margin-bottom: 48px;">
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:20px;">
+                        Welcome to</div>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace; font-size:56px; font-weight:700; color:#fff; letter-spacing:-0.03em; line-height:1; margin-bottom:24px;">
+                        form.</div>
+                    <p style="font-size:16px; color:rgba(255,255,255,0.5); line-height:1.7; max-width:280px;">Advanced
+                        facial geometry analysis. Completely private — nothing ever leaves your device.</p>
+                    <div style="display:flex; gap:20px; margin-top:32px;">
+                        <div style="text-align:center;">
+                            <div
+                                style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#fff;">
+                                100%</div>
+                            <div
+                                style="font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.3); margin-top:4px;">
+                                Private</div>
+                        </div>
+                        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+                        <div style="text-align:center;">
+                            <div
+                                style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#fff;">
+                                AI</div>
+                            <div
+                                style="font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.3); margin-top:4px;">
+                                On-Device</div>
+                        </div>
+                        <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+                        <div style="text-align:center;">
+                            <div
+                                style="font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:#fff;">
+                                0</div>
+                            <div
+                                style="font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.3); margin-top:4px;">
+                                Uploads</div>
+                        </div>
                     </div>
-                    <div><label
-                            class="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Weight
-                            (kg)</label><input type="number" id="prof-weight" required
-                            class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition">
+                </div><button class="survey-btn" onclick="Survey.next()">Get Started</button>
+            </div>
+            <div class="slide" id="slide-2" style="padding: 0 28px;">
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">
+                        Step 1 of 4</div>
+                    <div style="font-size:30px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.2;">When
+                        were you<br>born?</div>
+                    <p style="font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:28px;">Used to calculate aging
+                        metrics and personalize your BMR.</p><input type="date" id="prof-dob" class="survey-input"
+                        style="margin-bottom:20px;" max="">
+                    <div style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:12px;">
+                        GENDER</div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="survey-chip" data-val="male" onclick="Survey.selectChip(this, 'gender')">Male</div>
+                        <div class="survey-chip" data-val="female" onclick="Survey.selectChip(this, 'gender')">Female
+                        </div>
                     </div>
-                </div><button type="submit"
-                    class="w-full bg-[var(--text-main)] text-[var(--bg-main)] font-bold py-5 rounded-2xl mt-8 active:scale-95 transition tracking-wide text-sm">Get
-                    Started</button>
-            </form>
+                </div><button class="survey-btn" onclick="Survey.next()">Continue</button>
+            </div>
+            <div class="slide" id="slide-3" style="padding: 0 28px;">
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">
+                        Step 2 of 4</div>
+                    <div style="font-size:30px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.2;">How
+                        tall<br>are you?</div>
+                    <p style="font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:28px;">Enter in any format —
+                        we handle the conversion.</p><input type="text" id="prof-height" class="survey-input"
+                        placeholder='e.g. 5\' 11", 71in, 180cm' style="margin-bottom:12px;">
+                    <p style="font-size:11px; color:rgba(255,255,255,0.25);">Accepts: ft'in (5'11"), inches (71in),
+                        centimeters (180cm)</p>
+                </div><button class="survey-btn" onclick="Survey.next()">Continue</button>
+            </div>
+            <div class="slide" id="slide-4" style="padding: 0 28px;">
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">
+                        Step 3 of 4</div>
+                    <div style="font-size:30px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.2;">What's
+                        your<br>weight?</div>
+                    <p style="font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:28px;">Helps calculate your
+                        metabolic rate accurately.</p><input type="text" id="prof-weight" class="survey-input"
+                        placeholder="e.g. 160lbs, 72kg" style="margin-bottom:12px;">
+                    <p style="font-size:11px; color:rgba(255,255,255,0.25);">Accepts: pounds (160lbs or 160lb) or
+                        kilograms (72kg)</p>
+                </div><button class="survey-btn" onclick="Survey.next()">Continue</button>
+            </div>
+            <div class="slide" id="slide-5" style="padding: 0 28px;">
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">
+                        Step 4 of 4</div>
+                    <div style="font-size:30px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.2;">What's
+                        your<br>main goal?</div>
+                    <p style="font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:28px;">Select all that apply —
+                        we'll personalize your habits around this.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="survey-chip" data-val="symmetry" onclick="Survey.selectChip(this, 'goal', true)">
+                            Better symmetry</div>
+                        <div class="survey-chip" data-val="jawline" onclick="Survey.selectChip(this, 'goal', true)">
+                            Stronger jawline</div>
+                        <div class="survey-chip" data-val="skin" onclick="Survey.selectChip(this, 'goal', true)">Clearer
+                            skin</div>
+                        <div class="survey-chip" data-val="posture" onclick="Survey.selectChip(this, 'goal', true)">
+                            Better posture</div>
+                        <div class="survey-chip" data-val="hydration" onclick="Survey.selectChip(this, 'goal', true)">
+                            Reduce puffiness</div>
+                        <div class="survey-chip" data-val="tracking" onclick="Survey.selectChip(this, 'goal', true)">
+                            Track progress</div>
+                    </div>
+                </div><button class="survey-btn" onclick="Survey.finish()">Start Analyzing</button>
+            </div>
         </div>
         <main id="view-home" class="view active">
             <div class="camera-container" id="camera-container"><video id="camera-feed" autoplay playsinline
                     muted></video>
                 <div id="screen-flash"></div>
                 <div id="analysis-loader"
-                    class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center hidden-forced">
+                    class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center hidden-forced"
+                    style="z-index:35;">
                     <div class="loader-ring mb-6"></div>
                     <p class="font-mono text-xs text-white tracking-widest uppercase opacity-70 drop-shadow-md"
                         id="analysis-log">Analyzing...</p>
                 </div><canvas id="frozen-canvas" class="hidden-forced"></canvas>
                 <div class="scan-laser hidden-forced" id="scan-laser"></div>
+                <div id="blur-indicator">⚠ FOCUS</div>
                 <div
-                    class="absolute top-0 w-full px-6 header-pt flex justify-between items-start z-20 pointer-events-none">
+                    class="absolute top-0 w-full px-5 header-pt flex justify-between items-start z-20 pointer-events-none">
                     <button id="btn-light"
-                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
+                        class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
                             data-lucide="flashlight" class="w-5 h-5"></i></button>
                     <div
                         class="bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2">
                         <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i><span id="streak-counter"
                             class="font-mono text-xs font-bold text-white">0</span></div><button id="btn-flip"
-                        class="p-4 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
+                        class="p-3 bg-black/40 backdrop-blur-md rounded-full text-white active:scale-90 transition border border-white/10 pointer-events-auto"><i
                             data-lucide="switch-camera" class="w-5 h-5"></i></button>
                 </div>
                 <div class="camera-controls"><button class="shutter-btn" id="btn-capture" disabled>
@@ -118,105 +280,225 @@
             </div>
         </main>
         <main id="view-history" class="view">
-            <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-8">History</h1>
-                <div class="ios-card border-none bg-transparent" id="history-container">
-                    <div class="p-10 text-center bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)]"
-                        id="history-empty"><i data-lucide="scan-face"
-                            class="w-10 h-10 mx-auto text-[var(--border-color)] mb-4"></i>
-                        <p class="text-sm font-medium var(--text-muted)">No past scans found.</p>
+            <div class="px-5 pt-14 header-pt">
+                <h1 class="text-3xl font-bold tracking-tight mb-1">History</h1>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-6">Scan Archive
+                </p>
+                <div class="relative mb-4"><i data-lucide="search"
+                        class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"></i><input
+                        type="text" id="history-search" placeholder="Search by date or score..."
+                        class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl pl-10 pr-4 py-3.5 text-sm focus:outline-none"
+                        oninput="App.filterHistory(this.value)"></div>
+                <div style="display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; padding-bottom:4px;"><button
+                        onclick="App.filterHistoryType('all')" id="hist-filter-all"
+                        class="font-mono text-[10px] uppercase tracking-widest px-4 py-2 rounded-full border border-[var(--border-color)] bg-[var(--accent)] text-[var(--accent-invert)] whitespace-nowrap">All</button><button
+                        onclick="App.filterHistoryType('frontal')" id="hist-filter-frontal"
+                        class="font-mono text-[10px] uppercase tracking-widest px-4 py-2 rounded-full border border-[var(--border-color)] whitespace-nowrap">Frontal</button><button
+                        onclick="App.filterHistoryType('profile')" id="hist-filter-profile"
+                        class="font-mono text-[10px] uppercase tracking-widest px-4 py-2 rounded-full border border-[var(--border-color)] whitespace-nowrap">Profile</button><button
+                        onclick="App.filterHistoryType('milestone')" id="hist-filter-milestone"
+                        class="font-mono text-[10px] uppercase tracking-widest px-4 py-2 rounded-full border border-[var(--border-color)] whitespace-nowrap">Milestones</button>
+                </div>
+                <div id="history-container">
+                    <div id="history-empty" class="text-center py-20 hidden-forced"><i data-lucide="camera-off"
+                            class="w-10 h-10 mx-auto mb-4 opacity-20"></i>
+                        <p class="text-sm text-[var(--text-muted)]">No scans yet.</p>
+                        <p class="text-xs text-[var(--text-muted)] mt-2 opacity-60">Take your first scan to begin
+                            tracking.</p>
                     </div>
-                    <div id="history-list" class="flex flex-col gap-4"></div>
+                    <div id="history-list" class="space-y-3 pb-4"></div>
                 </div>
             </div>
         </main>
         <main id="view-habits" class="view">
-            <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-2">Routines</h1>
-                <p class="text-xs var(--text-muted) mb-8 font-mono uppercase tracking-wider">Daily recommendations</p>
-                <form id="add-habit-form" class="mb-6 flex gap-3"><input type="text" id="habit-input"
-                        placeholder="Add custom habit..."
-                        class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-5 py-4 text-sm focus:outline-none transition"
-                        required><button type="submit"
-                        class="bg-[var(--accent)] text-[var(--accent-invert)] px-6 rounded-2xl active:scale-95 transition"><i
-                            data-lucide="plus" class="w-5 h-5"></i></button></form>
-                <div class="ios-card" id="habit-list"></div>
-                <div class="mt-6 text-center"><button onclick="App.resetHabits()"
-                        class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] p-3 active:opacity-50">Reset
-                        Daily Status</button></div>
+            <div class="px-5 pt-14 header-pt">
+                <h1 class="text-3xl font-bold tracking-tight mb-1">Habits</h1>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-6">Daily Protocol
+                </p>
+                <div class="ios-card p-5 mb-4">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Today's
+                        Intake</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div style="text-align:center;">
+                            <div
+                                style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:12px;">
+                                Water</div>
+                            <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                                <div class="font-mono text-2xl font-bold" id="water-display">0.0L</div>
+                                <div style="display:flex; gap:6px;"><button onclick="App.logIntake('water', -0.25)"
+                                        class="w-9 h-9 rounded-full bg-[var(--bg-main)] border border-[var(--border-color)] text-[var(--text-main)] text-lg font-bold flex items-center justify-center active:scale-90 transition">−</button><button
+                                        onclick="App.logIntake('water', 0.25)"
+                                        class="w-9 h-9 rounded-full bg-[var(--accent)] text-[var(--accent-invert)] text-lg font-bold flex items-center justify-center active:scale-90 transition">+</button>
+                                </div>
+                                <div
+                                    style="font-size:9px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.1em;">
+                                    Goal: 2.5L</div>
+                            </div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div
+                                style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:12px;">
+                                Calories</div>
+                            <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                                <div class="font-mono text-2xl font-bold" id="calorie-display">0</div>
+                                <div style="display:flex; gap:6px;"><button onclick="App.logIntake('calories', -50)"
+                                        class="w-9 h-9 rounded-full bg-[var(--bg-main)] border border-[var(--border-color)] text-[var(--text-main)] text-lg font-bold flex items-center justify-center active:scale-90 transition">−</button><button
+                                        onclick="App.logIntake('calories', 50)"
+                                        class="w-9 h-9 rounded-full bg-[var(--accent)] text-[var(--accent-invert)] text-lg font-bold flex items-center justify-center active:scale-90 transition">+</button>
+                                </div>
+                                <div style="font-size:9px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.1em;"
+                                    id="calorie-goal-label">Goal: — kcal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ios-card mb-4" id="habit-list-card">
+                    <div id="habit-list"></div>
+                </div>
+                <div class="ios-card p-4 mb-4" id="add-habit-form">
+                    <div class="flex gap-3"><input type="text" id="habit-input" placeholder="Add custom habit..."
+                            class="flex-1 bg-[var(--bg-main)] border border-[var(--border-color)] text-[var(--text-main)] rounded-2xl px-4 py-3 text-sm focus:outline-none"><button
+                            onclick="App.addHabit(document.getElementById('habit-input').value, false)"
+                            class="bg-[var(--accent)] text-[var(--accent-invert)] rounded-2xl px-5 py-3 font-bold text-sm active:scale-95 transition">Add</button>
+                    </div>
+                </div><button onclick="App.resetHabits()"
+                    class="w-full border border-[var(--border-color)] rounded-2xl py-4 text-sm text-[var(--text-muted)] active:scale-95 transition mb-4">Reset
+                    Today's Habits</button>
             </div>
         </main>
         <main id="view-progress" class="view">
-            <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-8">Analytics</h1>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="ios-card p-5 border border-[var(--border-color)] bg-[var(--bg-card)] text-center"><i
-                            data-lucide="activity" class="w-6 h-6 mx-auto mb-2 text-[var(--text-muted)]"></i>
-                        <p class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-1">Base Burn</p>
-                        <p class="font-mono text-xl font-bold" id="stat-bmr">-- <span class="text-[10px]">kcal</span>
-                        </p>
+            <div class="px-5 pt-14 header-pt">
+                <h1 class="text-3xl font-bold tracking-tight mb-1">Trends</h1>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-6">Your
+                    Progression</p>
+                <div class="data-grid mb-4">
+                    <div class="data-badge">
+                        <p class="title">Streak</p>
+                        <p class="val" id="stat-streak">0 <span class="text-[10px]">days</span></p>
+                        <p class="desc">Consecutive daily scans</p>
                     </div>
-                    <div class="ios-card p-5 border border-[var(--border-color)] bg-[var(--bg-card)] text-center"><i
-                            data-lucide="flame" class="w-6 h-6 mx-auto mb-2 text-orange-500"></i>
-                        <p class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-1">Consistency
-                        </p>
-                        <p class="font-mono text-xl font-bold" id="stat-streak">-- <span class="text-[10px]">days</span>
-                        </p>
+                    <div class="data-badge">
+                        <p class="title">Live Burn</p>
+                        <p class="val text-sm" id="stat-bmr">— kcal</p>
+                        <p class="desc">Est. calories burned today</p>
+                    </div>
+                    <div class="data-badge">
+                        <p class="title">Age</p>
+                        <p class="val" id="stat-age">—</p>
+                        <p class="desc">Calculated from birthday</p>
+                    </div>
+                    <div class="data-badge">
+                        <p class="title">Best Score</p>
+                        <p class="val" id="stat-best">—</p>
+                        <p class="desc">Personal record</p>
                     </div>
                 </div>
-                <div class="ios-card p-6 mb-8">
-                    <h3 class="text-[10px] font-bold uppercase tracking-widest var(--text-muted) mb-6">Harmony Trend
-                    </h3>
-                    <div class="w-full h-56"><canvas id="progressChart"></canvas></div>
+                <div class="ios-card p-5 mb-4" style="height:220px;">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Harmony
+                        Over Time</p><canvas id="progressChart" style="height:155px!important;"></canvas>
                 </div>
-                <h2
-                    class="text-xs font-bold uppercase tracking-widest var(--text-muted) mb-4 mt-8 ml-2 flex justify-between items-center">
-                    <span>Milestones</span><span
-                        class="text-[9px] font-normal normal-case tracking-normal opacity-50">Locked hidden by
-                        default</span></h2>
-                <div class="ios-card p-5">
-                    <div id="milestones-list" class="space-y-6"></div>
+                <div class="ios-card p-5 mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Milestones
+                        </p><button onclick="App.toggleMilestonesAll()"
+                            class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)]"
+                            id="milestone-toggle">Show All</button>
+                    </div>
+                    <div id="milestones-list" class="space-y-5"></div>
+                </div>
+                <div class="ios-card p-5 mb-4">
+                    <div id="leaderboard-container"></div>
                 </div>
             </div>
         </main>
         <main id="view-settings" class="view">
-            <div class="px-6 header-pt">
-                <h1 class="text-3xl font-bold tracking-tight mb-8">Settings</h1>
-                <div class="mb-8">
-                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">
-                        Preferences</h2>
-                    <div class="ios-card">
-                        <div class="ios-list-item"><span class="font-medium text-sm">Light Mode</span>
-                            <div class="relative inline-block w-12 h-6 rounded-full bg-[var(--border-color)] transition-colors cursor-pointer"
-                                id="theme-toggle" onclick="App.toggleTheme()">
-                                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200"
-                                    id="theme-knob"></div>
-                            </div>
+            <div class="px-5 pt-14 header-pt">
+                <h1 class="text-3xl font-bold tracking-tight mb-1">Settings</h1>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-6">Configuration
+                </p>
+                <div class="ios-card mb-4">
+                    <div class="p-5 border-b border-[var(--border-color)]">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Profile
+                        </p>
+                        <div id="profile-summary" class="space-y-1"></div>
+                    </div>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.showProfileEdit()"><span
+                            class="text-sm">Edit Profile</span><i data-lucide="chevron-right"
+                            class="w-4 h-4 text-[var(--text-muted)]"></i></div>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.showWeightHeightPrompt()">
+                        <span class="text-sm">Update Height & Weight</span><i data-lucide="chevron-right"
+                            class="w-4 h-4 text-[var(--text-muted)]"></i></div>
+                </div>
+                <div class="ios-card mb-4">
+                    <p class="px-5 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                        Appearance</p>
+                    <div class="ios-list-item"><span class="text-sm">Dark/Light</span>
+                        <div id="theme-toggle" onclick="App.toggleTheme()"
+                            class="w-12 h-7 rounded-full relative cursor-pointer transition-colors"
+                            style="background:var(--border-color);">
+                            <div id="theme-knob"
+                                class="absolute top-1 left-1 w-5 h-5 rounded-full bg-white transition-transform"></div>
                         </div>
-                        <div class="ios-list-item"><span class="font-medium text-sm">Strict Scoring Algorithm</span>
-                            <div class="relative inline-block w-12 h-6 rounded-full transition-colors cursor-pointer"
-                                id="strict-toggle" onclick="App.toggleStrict()">
-                                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200"
-                                    id="strict-knob"></div>
-                            </div>
+                    </div>
+                    <div class="ios-list-item"><span class="text-sm">Strict Mode <span
+                                class="text-[10px] text-[var(--text-muted)]">— tighter scoring</span></span>
+                        <div id="strict-toggle" onclick="App.toggleStrict()"
+                            class="w-12 h-7 rounded-full relative cursor-pointer transition-colors"
+                            style="background:var(--border-color);">
+                            <div id="strict-knob"
+                                class="absolute top-1 left-1 w-5 h-5 rounded-full bg-white transition-transform"></div>
+                        </div>
+                    </div>
+                    <div class="ios-list-item"><span class="text-sm">Auto-Capture</span>
+                        <div id="autocapture-toggle" onclick="App.toggleAutocapture()"
+                            class="w-12 h-7 rounded-full relative cursor-pointer transition-colors"
+                            style="background:var(--border-color);">
+                            <div id="autocapture-knob"
+                                class="absolute top-1 left-1 w-5 h-5 rounded-full bg-white transition-transform"></div>
                         </div>
                     </div>
                 </div>
-                <div class="mb-8">
-                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 ml-4">Data
-                        Management</h2>
-                    <div class="ios-card">
-                        <div class="ios-list-item cursor-pointer active:bg-[var(--border-color)] transition"
-                            onclick="App.exportData()"><span class="font-medium text-sm">Export Data</span><i
-                                data-lucide="download" class="w-4 h-4 text-[var(--text-muted)]"></i></div>
-                        <div class="ios-list-item cursor-pointer active:bg-[#2a0d0d] transition"
-                            onclick="App.clearHistory()"><span class="text-red-500 font-medium text-sm">Delete All
-                                Data</span><i data-lucide="trash-2" class="w-4 h-4 text-red-500"></i></div>
+                <div class="ios-card mb-4">
+                    <p class="px-5 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                        Notifications</p>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.configureNotifications()">
+                        <div>
+                            <p class="text-sm">Daily Scan Reminder</p>
+                            <p class="text-[10px] text-[var(--text-muted)]" id="notif-time-label">Set a reminder time
+                            </p>
+                        </div><i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-muted)]"></i>
                     </div>
                 </div>
-                <div class="text-center pb-8 opacity-40 mt-12">
-                    <p class="font-mono text-[9px] uppercase tracking-widest">FORM v6.2.0</p>
-                    <p class="font-mono text-[9px] uppercase tracking-widest mt-1">Privacy First • Processed Locally</p>
+                <div class="ios-card mb-4">
+                    <p class="px-5 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                        Data</p>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.exportData()"><span
+                            class="text-sm">Export Scan Data</span><i data-lucide="download"
+                            class="w-4 h-4 text-[var(--text-muted)]"></i></div>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.importData()"><span
+                            class="text-sm">Import Scan Data</span><i data-lucide="upload"
+                            class="w-4 h-4 text-[var(--text-muted)]"></i></div><input type="file" id="import-file-input"
+                        accept=".json" style="display:none;" onchange="App.handleImport(this)">
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.clearHistory()"><span
+                            class="text-sm text-red-500">Delete All Data</span><i data-lucide="trash-2"
+                            class="w-4 h-4 text-red-500"></i></div>
+                </div>
+                <div class="ios-card mb-4">
+                    <p class="px-5 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                        About</p>
+                    <div class="ios-list-item cursor-pointer active:opacity-60" onclick="App.showAbout()"><span
+                            class="text-sm">How form. Works</span><i data-lucide="chevron-right"
+                            class="w-4 h-4 text-[var(--text-muted)]"></i></div>
+                    <div class="ios-list-item cursor-pointer active:opacity-60"
+                        onclick="window.open('https://github.com/ayqshi','_blank')"><span class="text-sm">GitHub —
+                            ayqshi</span><i data-lucide="external-link" class="w-4 h-4 text-[var(--text-muted)]"></i>
+                    </div>
+                    <div class="ios-list-item"><span class="text-sm text-[var(--text-muted)]">Version</span><span
+                            class="font-mono text-xs text-[var(--text-muted)]">7.0.0</span></div>
+                </div>
+                <div class="text-center pb-8 opacity-30 mt-8">
+                    <p class="font-mono text-[9px] uppercase tracking-widest">form. v7.0.0</p>
+                    <p class="font-mono text-[9px] uppercase tracking-widest mt-1">Privacy First · Processed Locally</p>
                 </div>
             </div>
         </main>
@@ -234,7 +516,7 @@
         </nav>
         <div id="results-modal" class="modal-overlay">
             <div class="modal-content" id="report-content">
-                <div class="flex justify-between items-center mb-8">
+                <div class="flex justify-between items-center mb-6">
                     <div>
                         <h2 class="text-3xl font-bold tracking-tight">Scan Results</h2>
                         <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mt-1">
@@ -244,81 +526,166 @@
                             data-lucide="x" class="w-5 h-5"></i></button>
                 </div>
                 <div
-                    class="flex items-center justify-between gap-6 mb-8 bg-[var(--bg-main)] p-6 rounded-3xl border border-[var(--border-color)]">
-                    <div class="flex items-center gap-4">
+                    class="flex items-center justify-between gap-4 mb-6 bg-[var(--bg-main)] p-5 rounded-3xl border border-[var(--border-color)]">
+                    <div class="flex items-baseline gap-2">
                         <div class="font-mono text-6xl font-bold tracking-tighter" id="res-sym">--</div>
-                        <div class="text-[10px] font-bold uppercase text-[var(--text-muted)] tracking-widest">/ 10.0
+                        <div class="text-[10px] font-bold uppercase text-[var(--text-muted)] tracking-widest">/10.0
                         </div>
                     </div>
                     <div class="text-right">
                         <h3 class="font-bold text-sm uppercase tracking-widest mb-1">Structural Harmony</h3>
-                        <p class="text-[10px] text-[var(--text-muted)] leading-relaxed max-w-[120px]">Rating based on
-                            facial symmetry and dimorphism.</p>
+                        <p class="text-[10px] text-[var(--text-muted)] leading-relaxed max-w-[120px]"
+                            id="res-angle-label">Frontal analysis</p>
                     </div>
                 </div>
-                <div class="data-grid">
+                <div class="data-grid mb-5">
                     <div class="data-badge">
                         <p class="title">FWHR Ratio</p>
                         <p class="val" id="res-fwhr">--</p>
-                        <p class="desc">Facial Width-to-Height. ~1.8-1.9 is robust. Relates to dimorphism.</p>
+                        <p class="desc">Face width to height. ~1.85 is ideal for definition.</p>
                     </div>
                     <div class="data-badge">
                         <p class="title">Canthal Tilt</p>
                         <p class="val" id="res-canthal">--°</p>
-                        <p class="desc">Eye axis angle. Positive (+) is alert. Negative (-) indicates fatigue.</p>
+                        <p class="desc">Eye axis angle. Positive is associated with alertness.</p>
                     </div>
                     <div class="data-badge">
-                        <p class="title">Gonial Angle</p>
+                        <p class="title">Jaw Angle</p>
                         <p class="val" id="res-jaw">--°</p>
-                        <p class="desc">Jaw steepness. 115°-130° is ideal for definition.</p>
+                        <p class="desc">115–130° is ideal for jaw definition.</p>
                     </div>
                     <div class="data-badge">
-                        <p class="title">Midface Compact</p>
+                        <p class="title">Midface</p>
                         <p class="val" id="res-mid">--</p>
-                        <p class="desc">Eye to mouth relative to face. Lower ratios indicate a youthful structure.</p>
+                        <p class="desc">Eye-to-mouth distance relative to face. Lower = more compact.</p>
                     </div>
                 </div>
-                <div class="ios-card p-5 mb-6 bg-[var(--bg-main)]">
+                <div id="smile-section" class="ios-card p-4 mb-5 hidden-forced">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3">Smile
+                        Analysis</p>
+                    <div class="data-grid" style="margin-bottom:0;">
+                        <div class="data-badge">
+                            <p class="title">Smile Form</p>
+                            <p class="val" id="res-smile-form">--</p>
+                            <p class="desc">Symmetry of your smile shape</p>
+                        </div>
+                        <div class="data-badge">
+                            <p class="title">Dental Show</p>
+                            <p class="val" id="res-dental">--</p>
+                            <p class="desc">How much teeth are visible</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ios-card p-5 mb-5 bg-[var(--bg-main)]">
                     <h3 class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">Facial
-                        Thirds (U:M:L)</h3>
+                        Thirds (Upper : Mid : Lower)</h3>
                     <div class="flex h-5 rounded-full overflow-hidden font-mono text-[9px] text-white text-center leading-5 font-bold"
                         id="thirds-bar">
                         <div style="width:33%; background:#222" id="t-upper">33%</div>
                         <div style="width:33%; background:#444" id="t-mid">33%</div>
                         <div style="width:34%; background:#111" id="t-lower">34%</div>
                     </div>
-                    <p class="text-[10px] text-[var(--text-muted)] mt-3 text-center">Ideally balanced at roughly 33%
-                        each.</p>
+                    <p class="text-[10px] text-[var(--text-muted)] mt-3 text-center">Ideally balanced at ~33% each.</p>
                 </div>
-                <div class="space-y-6 mb-8 px-2">
+                <div class="space-y-5 mb-6 px-1">
                     <div>
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3">
-                            <span>Leanness / Retention</span><span id="res-bloat-val" class="font-mono">--/100</span>
-                        </div>
+                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                            <span>Leanness</span><span id="res-bloat-val" class="font-mono">--/100</span></div>
                         <div class="progress-track">
-                            <div id="res-bloat-bar" class="progress-fill" style="width: 0%"></div>
+                            <div id="res-bloat-bar" class="progress-fill" style="width:0%"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-3">
-                            <span>Skin Texture Clarity</span><span id="res-skin-val" class="font-mono">--/100</span>
-                        </div>
+                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                            <span>Skin Clarity</span><span id="res-skin-val" class="font-mono">--/100</span></div>
                         <div class="progress-track">
-                            <div id="res-skin-bar" class="progress-fill" style="width: 0%"></div>
+                            <div id="res-skin-bar" class="progress-fill" style="width:0%"></div>
+                        </div>
+                    </div>
+                    <div id="posture-section" class="hidden-forced">
+                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+                            <span>Posture</span><span id="res-posture-val" class="font-mono">--/100</span></div>
+                        <div class="progress-track">
+                            <div id="res-posture-bar" class="progress-fill" style="width:0%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-[var(--accent)] text-[var(--accent-invert)] rounded-2xl p-6 mb-8 mt-4">
-                    <h3 class="text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-2 opacity-80">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i> Recommended Actions</h3>
-                    <div class="text-sm font-medium space-y-2 leading-relaxed" id="res-actions">Loading
-                        recommendations...</div>
+                <div class="mb-6">
+                    <h3
+                        class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> Personalized Actions </h3>
+                    <div id="res-actions"></div>
                 </div>
-                <div class="flex gap-4"><button onclick="App.shareResults()"
-                        class="flex-1 bg-[var(--accent)] text-[var(--accent-invert)] border border-[var(--border-color)] font-bold py-5 rounded-2xl active:scale-95 transition tracking-wide text-sm flex justify-center items-center gap-2"><i
+                <div class="flex gap-3"><button onclick="App.initSharePreview()"
+                        class="flex-1 bg-[var(--accent)] text-[var(--accent-invert)] font-bold py-4 rounded-2xl active:scale-95 transition text-sm flex justify-center items-center gap-2"><i
                             data-lucide="share" class="w-4 h-4"></i> Share </button><button onclick="App.closeModal()"
-                        class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] font-bold py-5 rounded-2xl active:scale-95 transition tracking-wide text-sm">
-                        Close </button></div>
+                        class="flex-1 bg-[var(--bg-card)] border border-[var(--border-color)] font-bold py-4 rounded-2xl active:scale-95 transition text-sm">Close</button>
+                </div>
+            </div>
+        </div>
+        <div id="share-preview-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="flex justify-between items-center mb-5">
+                    <h2 class="text-xl font-bold tracking-tight">Share Your Score</h2><button
+                        onclick="App.closeSharePreview()"
+                        class="p-2 bg-[var(--bg-main)] rounded-full border border-[var(--border-color)]"><i
+                            data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <div class="flex justify-center mb-5"><canvas id="share-preview-canvas"
+                        style="width:100%; max-width:300px; border-radius:16px; border:1px solid var(--border-color);"></canvas>
+                </div>
+                <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] text-center mb-5">
+                    ayqshi.github.io/form.</p><button onclick="App.executeShare()"
+                    class="w-full bg-[var(--accent)] text-[var(--accent-invert)] font-bold py-4 rounded-2xl active:scale-95 transition text-sm flex justify-center items-center gap-2 mb-3"><i
+                        data-lucide="share-2" class="w-4 h-4"></i> Share Image </button><button
+                    onclick="App.downloadShareImage()"
+                    class="w-full bg-[var(--bg-card)] border border-[var(--border-color)] font-bold py-4 rounded-2xl active:scale-95 transition text-sm flex justify-center items-center gap-2"><i
+                        data-lucide="download" class="w-4 h-4"></i> Save to Photos </button>
+            </div>
+        </div>
+        <div id="about-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold tracking-tight">How form. Works</h2>
+                        <p class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mt-1">
+                            Technical Overview</p>
+                    </div><button onclick="document.getElementById('about-modal').classList.remove('active')"
+                        class="p-3 bg-[var(--bg-main)] rounded-full border border-[var(--border-color)]"><i
+                            data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+                <div
+                    style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:20px; padding:20px; margin-bottom:20px; font-family:'JetBrains Mono',monospace; font-size:10px; line-height:2; color:var(--text-muted); overflow:hidden;">
+                    <div style="color:var(--text-main); font-size:11px; margin-bottom:8px;">Neural Pipeline</div> Camera
+                    → MediaPipe FaceLandmarker<br> &nbsp;&nbsp;↳ 468 3D facial landmarks<br> &nbsp;&nbsp;↳ Pose
+                    detection (yaw/pitch)<br> &nbsp;&nbsp;↳ Blendshape analysis (smile)<br> PoseLandmarker<br>
+                    &nbsp;&nbsp;↳ 33 body keypoints<br> &nbsp;&nbsp;↳ Shoulder & neck alignment<br> Geometry Engine<br>
+                    &nbsp;&nbsp;↳ Gaussian scoring curves<br> &nbsp;&nbsp;↳ DNA baseline calibration<br> &nbsp;&nbsp;↳
+                    Multi-metric weighted sum<br>
+                    <div
+                        style="color:var(--text-muted); margin-top:8px; border-top:1px solid var(--border-color); padding-top:8px;">
+                        All processing: on-device only<br>Storage: IndexedDB (local)</div>
+                </div>
+                <div class="space-y-4">
+                    <div class="ios-card p-4">
+                        <p class="font-bold text-sm mb-2">Gaussian Bell Curve Scoring</p>
+                        <p class="text-xs text-[var(--text-muted)] leading-relaxed">Each metric (FWHR, canthal tilt, jaw
+                            angle, etc.) is scored using a Gaussian function centered on your DNA baseline — not
+                            arbitrary global averages. This means scoring is fair to your unique structure.</p>
+                    </div>
+                    <div class="ios-card p-4">
+                        <p class="font-bold text-sm mb-2">DNA Baseline System</p>
+                        <p class="text-xs text-[var(--text-muted)] leading-relaxed">On your first scan, form. maps your
+                            immutable bone structure. Future scans measure optimization relative to your personal
+                            potential — bloat reduction, symmetry, skin clarity — not just bone genetics.</p>
+                    </div>
+                    <div class="ios-card p-4">
+                        <p class="font-bold text-sm mb-2">Privacy Architecture</p>
+                        <p class="text-xs text-[var(--text-muted)] leading-relaxed">Zero server calls. All vision models
+                            are cached locally via a Service Worker. Your face images and scores live only in your
+                            device's IndexedDB. No account, no analytics, no uploads.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
